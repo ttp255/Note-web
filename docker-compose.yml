@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  note-app:
+    build: .
+    ports:
+      - 5000:5000
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/note
+      - ACCESS_TOKEN_SECRET=access_token_secret
+      - REFRESH_TOKEN_SECRET=refresh_token_secret
+      - PORT=5000
+      - URL_REDIS=redis://redis:6379/
+
+    depends_on:
+      - mongo
+      - redis
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+
+    volumes:
+      - mongo-data:/data/mongo
+
+  redis:
+     image: redis:7.4.2-alpine
+    
+     restart: always
+     
+     ports:
+       - 6379:6379
+
+     volumes:
+       - redis-data:/data/redis
+volumes:
+  mongo-data:
+  redis-data:
+
+    
+    

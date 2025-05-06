@@ -1,0 +1,8 @@
+node_modules
+.git
+.gitignore
+rest.http
+Dockerfile
+.dockerignore
+docker-compose.yml
+scrip.js
